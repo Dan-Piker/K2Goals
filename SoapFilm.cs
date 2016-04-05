@@ -7,6 +7,12 @@ using Rhino.Geometry;
 
 namespace KangarooSolver.Goals
 {
+    /// <summary>
+    /// Simple isotropic soap film element, as used for finding minimal surfaces
+    /// Equivalent to cotan weighted Laplacian smoothing
+    /// http://people.bath.ac.uk/abscjkw/LectureNotes/LightweightStructures/OtherMaterial/SoapFilmElement.pdf
+    /// http://www.cs.cmu.edu/~kmcrane/Projects/DGPDEC/paper.pdf
+    /// </summary>
     public class SoapFilm : GoalObject
     {
         public double Strength;

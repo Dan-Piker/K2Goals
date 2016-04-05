@@ -4,6 +4,15 @@ using System;
 
 namespace KangarooSolver.Goals
 {
+    /// <summary>
+    /// Bending resistance between a pair of triangles
+    /// Based on ideas from
+    /// "Discrete Shells" by Grinspun et al
+    /// http://www.cs.columbia.edu/cg/pdfs/10_ds.pdf
+    /// and
+    /// "Interactive Form-Finding of Elastic Origami" by Tachi
+    /// http://www.tsg.ne.jp/TT/cg/ElasticOrigami_Tachi_IASS2013.pdf
+    /// </summary>
     public class Hinge : IGoal
     {
         public double Strength;

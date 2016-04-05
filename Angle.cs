@@ -7,6 +7,10 @@ namespace KangarooSolver.Goals
     /// <summary>
     /// Make 2 directed lines form a given angle
     /// (This is the same as bending, except the 2 lines need not share a vertex)
+    /// 
+    /// The approach used here is described in the paper "Tensegrity spline beam and grid shell structures"
+    /// by S.M.L. Adriaenssens, M.R.Barnes
+    /// http://formfindinglab.princeton.edu/wp-content/uploads/2011/09/Spline-Beam.pdf
     /// </summary>
     public class Angle : IGoal
     {

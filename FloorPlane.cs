@@ -7,7 +7,7 @@ using Rhino.Geometry;
 
 namespace KangarooSolver.Goals
 {
-    public class FloorPlane : IGoal
+    public class FloorPlane : GoalObject
     {
         public double Strength;
 
@@ -23,12 +23,7 @@ namespace KangarooSolver.Goals
             Strength = k;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {           
             int L = p.Count;
 
@@ -53,13 +48,6 @@ namespace KangarooSolver.Goals
 
             }
         }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+ 
     }
 }

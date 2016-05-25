@@ -11,7 +11,7 @@ namespace KangarooSolver.Goals
     /// This rotates a line segment to align it with a given vector direction.
     /// If no direction is supplied, it will take the closest of the +/- world XYZ directions, and can be used to snap geometry to orthogonal.
     /// </summary>
-    public class Direction : IGoal
+    public class Direction : GoalObject
     {
         public Vector3d Dir;
         public double Strength;
@@ -40,12 +40,7 @@ namespace KangarooSolver.Goals
             Strength = K;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             Point3d S = p[PIndex[0]].Position;
             Point3d E = p[PIndex[1]].Position;
@@ -58,13 +53,6 @@ namespace KangarooSolver.Goals
             Weighting[0] = Strength;
             Weighting[1] = Strength;
         }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+  
     }
 }

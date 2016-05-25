@@ -10,7 +10,7 @@ namespace KangarooSolver.Goals
     /// <summary>
     /// Make distance between 2 points a multiple of some given factor
     /// </summary>
-    public class LengthMultiple : IGoal
+    public class LengthMultiple : GoalObject
     {
         public double Stiffness;
         public double Factor;
@@ -37,12 +37,7 @@ namespace KangarooSolver.Goals
             Factor = F;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             Vector3d current = p[PIndex[1]].Position - p[PIndex[0]].Position;
             double LengthNow = current.Length;
@@ -53,15 +48,7 @@ namespace KangarooSolver.Goals
             Move[1] = -SpringMove;
             Weighting[0] = 2*Stiffness;
             Weighting[1] = 2*Stiffness;
-        }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+        } 
 
     }
 }

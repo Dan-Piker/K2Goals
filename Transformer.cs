@@ -7,7 +7,7 @@ using Rhino.Geometry;
 
 namespace KangarooSolver.Goals
 {
-    public class Transformer : IGoal
+    public class Transformer : GoalObject
     {
         public double Strength;
         public Transform XForm;
@@ -36,13 +36,8 @@ namespace KangarooSolver.Goals
             XForm = T;
             T.TryGetInverse(out Inverse);
         }
-
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+       
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
 
             Point3d PT0 = p[PIndex[0]].Position;
@@ -58,13 +53,6 @@ namespace KangarooSolver.Goals
             Weighting[0] = Weighting[1] = Strength;
         }
 
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+      
     }
 }

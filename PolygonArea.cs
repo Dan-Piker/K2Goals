@@ -7,7 +7,7 @@ using Rhino.Geometry;
 
 namespace KangarooSolver.Goals
 {
-    public class PolygonArea : IGoal
+    public class PolygonArea : GoalObject
     {
         public double Strength;
         public double TargetArea;
@@ -43,13 +43,8 @@ namespace KangarooSolver.Goals
             TargetArea = Area;
             Strength = k;
         }
-
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             double CurrentAreaDoubled = 0;
             double TotalLength = 0;
@@ -81,14 +76,6 @@ namespace KangarooSolver.Goals
                 Move[NextVert] += Pressure;
                 Weighting[i] = Strength;
             }
-        }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+        }       
     }
 }

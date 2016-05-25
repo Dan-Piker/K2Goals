@@ -7,7 +7,7 @@ namespace KangarooSolver.Goals
     /// Keep the length of a line between some upper and lower bounds
     /// When it is between these lengths no force is applied
     /// </summary>
-    public class ClampLength : IGoal
+    public class ClampLength : GoalObject
     {
         public double Upper;
         public double Lower;
@@ -37,12 +37,7 @@ namespace KangarooSolver.Goals
             Stiffness = k;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             Vector3d current = p[PIndex[1]].Position - p[PIndex[0]].Position;
             double LengthNow = current.Length;
@@ -69,15 +64,6 @@ namespace KangarooSolver.Goals
                 Move[0] = Vector3d.Zero;
                 Move[1] = Vector3d.Zero;
             }
-        }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
-
+        }   
     }
 }

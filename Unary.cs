@@ -3,7 +3,7 @@ using Rhino.Geometry;
 
 namespace KangarooSolver.Goals
 {
-    public class Unary : IGoal
+    public class Unary : GoalObject
     {
         public Vector3d Force;        
 
@@ -27,25 +27,11 @@ namespace KangarooSolver.Goals
             Force = v;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }  
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-       
-        public void Calculate(List<Particle> p)
+        public override void Calculate(List<Particle> p)
         {            
             Move[0] = Force;                  
             Weighting[0] = 1.0;
         }
-
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+      
     }    
 }

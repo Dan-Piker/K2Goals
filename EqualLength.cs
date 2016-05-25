@@ -10,7 +10,7 @@ namespace KangarooSolver.Goals
     /// <summary>
     /// Make a set of lines equal length
     /// </summary>
-    public class EqualLength : IGoal
+    public class EqualLength : GoalObject
     {
         public double Strength;
 
@@ -43,12 +43,7 @@ namespace KangarooSolver.Goals
             Strength = k;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             int L = PIndex.Length / 2;
             double AvgLength = 0;
@@ -70,13 +65,6 @@ namespace KangarooSolver.Goals
                 Weighting[i + L] = Strength;
             }
         }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+  
     }
 }

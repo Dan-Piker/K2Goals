@@ -7,7 +7,7 @@ using Rhino.Geometry;
 
 namespace KangarooSolver.Goals
 {
-    public class OnMesh : IGoal
+    public class OnMesh : GoalObject
     {
         public double Strength;
         public Mesh _m;
@@ -44,12 +44,7 @@ namespace KangarooSolver.Goals
             Strength = k;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             for (int i = 0; i < PIndex.Length; i++)
             {
@@ -59,13 +54,6 @@ namespace KangarooSolver.Goals
                 Weighting[i] = Strength;
             }
         }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+      
     }
 }

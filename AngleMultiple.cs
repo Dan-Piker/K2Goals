@@ -10,7 +10,7 @@ namespace KangarooSolver.Goals
     /// <summary>
     /// Make angle between 2 lines a multiple of some given factor
     /// </summary>    
-    public class AngleMultiple : IGoal
+    public class AngleMultiple : GoalObject
     {
         public double EI;
         public double AngleFactor;
@@ -37,12 +37,7 @@ namespace KangarooSolver.Goals
             AngleFactor = AF;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             Point3d P0 = p[PIndex[0]].Position;
             Point3d P1 = p[PIndex[1]].Position;
@@ -76,14 +71,6 @@ namespace KangarooSolver.Goals
             Weighting[1] = EI;
             Weighting[2] = EI;
             Weighting[3] = EI;
-        }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
         }
     }
 }

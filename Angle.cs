@@ -12,7 +12,7 @@ namespace KangarooSolver.Goals
     /// by S.M.L. Adriaenssens, M.R.Barnes
     /// http://formfindinglab.princeton.edu/wp-content/uploads/2011/09/Spline-Beam.pdf
     /// </summary>
-    public class Angle : IGoal
+    public class Angle : GoalObject
     {
         public double EI;
         public double RestAngle;
@@ -48,12 +48,7 @@ namespace KangarooSolver.Goals
             RestAngle = RA;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
           Point3d P0 = p[PIndex[0]].Position;
           Point3d P1 = p[PIndex[1]].Position;
@@ -86,14 +81,6 @@ namespace KangarooSolver.Goals
           Weighting[1] = EI;
           Weighting[2] = EI;
           Weighting[3] = EI;
-        }
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+        }       
     }
 }

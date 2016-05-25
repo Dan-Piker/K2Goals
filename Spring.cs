@@ -3,7 +3,7 @@ using Rhino.Geometry;
 
 namespace KangarooSolver.Goals
 {
-    public class Spring : IGoal
+    public class Spring : GoalObject
     {
         public double RestLength, Stiffness;
 
@@ -28,12 +28,8 @@ namespace KangarooSolver.Goals
             RestLength = l;
             Stiffness = k;
         }
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }  
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-       
-        public void Calculate(List<Particle> p)
+        
+        public override void Calculate(List<Particle> p)
         {
             Vector3d current = p[PIndex[1]].Position - p[PIndex[0]].Position;
             double stretchfactor = 1.0 - RestLength / current.Length;
@@ -43,13 +39,8 @@ namespace KangarooSolver.Goals
             Weighting[0] = 2*Stiffness;
             Weighting[1] = 2*Stiffness;
         }
-
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-
-        public object Output(List<Particle> p)
+       
+        public override object Output(List<Particle> p)
         {
             return new Line(p[PIndex[0]].Position, p[PIndex[1]].Position);
         }

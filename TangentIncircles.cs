@@ -6,7 +6,7 @@ namespace KangarooSolver.Goals
     /// <summary>
     /// For a pair of adjacent triangles in a mesh, make their incircles tangent    
     /// </summary>
-    public class TangentIncircles : IGoal
+    public class TangentIncircles : GoalObject
     {
         public double K;
 
@@ -31,12 +31,7 @@ namespace KangarooSolver.Goals
             K = Strength;
         }
        
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             Point3d P0 = p[PIndex[0]].Position;
             Point3d P1 = p[PIndex[1]].Position; 
@@ -77,16 +72,6 @@ namespace KangarooSolver.Goals
             Move[3] = M3 - M2;
 
             Weighting[0] = Weighting[1] = Weighting[2] = Weighting[3] = K;     
-        }
-
-        public IGoal Clone()
-        {
-            return this.MemberwiseClone() as IGoal;
-        }
-
-        public object Output(List<Particle> p)
-        {
-            return null;
-        }
+        }      
     }
 }

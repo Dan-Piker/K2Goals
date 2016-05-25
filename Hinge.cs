@@ -13,12 +13,11 @@ namespace KangarooSolver.Goals
     /// "Interactive Form-Finding of Elastic Origami" by Tachi
     /// http://www.tsg.ne.jp/TT/cg/ElasticOrigami_Tachi_IASS2013.pdf
     /// </summary>
-    public class Hinge : IGoal
+    public class Hinge : GoalObject
     {
         public double Strength;
 
         public double RestAngle;
-
 
         public Hinge()
         {
@@ -43,12 +42,7 @@ namespace KangarooSolver.Goals
             RestAngle = RA;
         }
 
-        public Point3d[] PPos { get; set; }
-        public int[] PIndex { get; set; }
-        public Vector3d[] Move { get; set; }
-        public double[] Weighting { get; set; }
-
-        public void Calculate(List<KangarooSolver.Particle> p)
+        public override void Calculate(List<KangarooSolver.Particle> p)
         {
             Point3d P0 = p[PIndex[0]].Position;
             Point3d P1 = p[PIndex[1]].Position;
@@ -105,17 +99,6 @@ namespace KangarooSolver.Goals
             Weighting[2] = Strength;
             Weighting[3] = Strength;
         }
-
-        public IGoal Clone()
-        {
-            return (IGoal)this.MemberwiseClone();
-        }
-
-        public object Output(List<KangarooSolver.Particle> p)
-        {
-            return null;
-        }
-
 
     }
 }
